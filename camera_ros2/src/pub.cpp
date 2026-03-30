@@ -13,6 +13,7 @@
 	videoconvert ! video/x-raw, format=(string)BGR ! appsink"; */
 
 // raspberry pi5
+
 std::string src = "libcamerasrc ! \
 	video/x-raw,format=YUY2,width=640,height=480,framerate=30/1 ! \
     queue ! videoconvert ! videoflip method=rotate-180 ! \
@@ -24,7 +25,7 @@ int main(int argc, char * argv[])
     auto node = std::make_shared<rclcpp::Node>("campub");
     auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(10)); //TCP
     //auto qos_profile = rclcpp::QoS(rclcpp::KeepLast(10)).best_effort(); //UDP
-    auto mypub = node->create_publisher<sensor_msgs::msg::CompressedImage>("image/compressed", qos_profile );
+    auto mypub = node->create_publisher<sensor_msgs::msg::CompressedImage>("image/compressed_12", qos_profile );
     
     std_msgs::msg::Header hdr;
     sensor_msgs::msg::CompressedImage::SharedPtr msg;
